@@ -1,53 +1,50 @@
 {
-    "title": "Soccer stats actor Input Schema",
-    "description": "This is the input schema to use this actor.",
-    "type": "object",
-    "schemaVersion": 1,
-    "properties": {
-      "type": {
-        "title": "type",
-        "type": "string",
-        "description": "Defines the information that will be scraped",
-        "default": "TABLES",
-        "editor": "select",
-        "prefill": "TABLES"
-      },
-      "leagues": {
-        "title": "leagues",
-        "type": "array",
-        "description": "Array of leagues that will be scraped",
-        "editor": "stringList",
-        "prefill": "\"['england', 'france']\"",
-        "minItems": 1
-      },
-      "season": {
-        "title": "season",
-        "type": "string",
-        "description": "Selects current season or the last season",
-        "default": "2021-2022",
-        "editor": "select",
-        "prefill": "2021-2022"
-      },
-      "selectedWeeks": {
-        "title": "selectedWeeks",
-        "type": "array",
-        "description": "Selects the starting week and the ending week if you are scraping the type: 'SELECTEDWEEKS' ",
-        "default": "[1,4]",
-        "editor": "json",
-        "prefill": "[1,4]",
-        "maxItems": 2,
-        "minItems": 2
-      },
-      "useProxy": {
-        "title": "useProxy",
-        "type": "boolean",
-        "description": "Selects if you want to use a proxy",
-        "editor": "checkbox",
-        "default": false
-      }
+  "title": "Soccer stats actor Input Schema",
+  "description": "This is the input schema to use this actor.",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "type": {
+      "title": "type",
+      "type": "string",
+      "description": "Defines the information that will be scraped",
+      "default": "TABLES",
+      "editor": "select",
+      "enum": ["TABLES", "CURRENTWEEK", "SELECTEDWEEKS", "FULLSCHEDULE"],
+      "enumTitles": ["Tables", "Current Matchday", "Matches between two weeks", "Season schedule"]
     },
-    "required": [
-      "type",
-      "leagues"
-    ]
-  }
+    "leagues": {
+      "title": "leagues",
+      "type": "array",
+      "description": "Array of leagues that will be scraped",
+      "editor": "json",
+      "prefill": "['england', 'france']",
+      "minItems": 1
+    },
+    "season": {
+      "title": "season",
+      "type": "string",
+      "description": "Selects current season or the last season",
+      "default": "2021-2022",
+      "editor": "select",
+      "enum": ["2021-2022", "2020"],
+      "enumTitles": ["2021-2022", "2020-2021"]
+    },
+    "selectedWeeks": {
+      "title": "selectedWeeks",
+      "type": "array",
+      "description": "Selects the starting week and the ending week if you are scraping the type: 'SELECTEDWEEKS' ",
+      "default": "[1,4]",
+      "editor": "json",
+      "prefill": "[1,4]"
+    },
+    "useProxy": {
+      "title": "useProxy",
+      "type": "boolean",
+      "description": "Selects if you want to use a proxy",
+      "editor": "checkbox",
+      "default": false
+    }
+  },
+  "required": []
+}
