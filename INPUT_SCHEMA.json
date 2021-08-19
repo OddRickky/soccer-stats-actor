@@ -7,7 +7,7 @@
     "type": {
       "title": "type",
       "type": "string",
-      "description": "Defines the information that will be scraped",
+      "description": "Defines the information that will be scraped. If you are scraping matches between two weeks, you should also define array of two weeks as the selectedWeeks input",
       "default": "TABLES",
       "editor": "select",
       "enum": ["TABLES", "CURRENTWEEK", "SELECTEDWEEKS", "FULLSCHEDULE"],
@@ -16,15 +16,14 @@
     "leagues": {
       "title": "leagues",
       "type": "array",
-      "description": "Array of leagues that will be scraped",
+      "description": "Array of leagues that will be scraped. Available leagues: brazil, czechrepublic, germany, germany2, denmark, england, england2, spain, spain2, france, france2, greece, netherlands, italy, italy2, poland, portugal, russia, turkey",
       "editor": "json",
-      "prefill": ["england", "france"],
-      "minItems": 1
+      "prefill": ["england", "france"]
     },
     "season": {
       "title": "season",
       "type": "string",
-      "description": "Selects current season or the last season",
+      "description": "Selects the given season",
       "default": "2021-2022",
       "editor": "select",
       "enum": ["2021-2022", "2020"],
@@ -33,7 +32,7 @@
     "selectedWeeks": {
       "title": "selectedWeeks",
       "type": "array",
-      "description": "Selects the starting week and the ending week if you are scraping the type: 'SELECTEDWEEKS' ",
+      "description": "Selects the starting week and the ending week if you are scraping matchweeks from given two weeks. Array length must be 2",
       "default": [1,4],
       "editor": "json",
       "prefill": [1,4]
