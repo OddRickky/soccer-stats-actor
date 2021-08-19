@@ -18,7 +18,7 @@
       "type": "array",
       "description": "Array of leagues that will be scraped",
       "editor": "json",
-      "prefill": "['england', 'france']",
+      "prefill": ["england", "france"],
       "minItems": 1
     },
     "season": {
