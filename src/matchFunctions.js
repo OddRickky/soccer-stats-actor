@@ -78,7 +78,7 @@ async function getTable(request, $) {
         }
         tableSummary.push(teamData);
     });
-
+    console.log(tableSummary);
     await dataset.pushData(tableSummary);
 }
 
