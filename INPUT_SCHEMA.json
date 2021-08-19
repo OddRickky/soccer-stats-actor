@@ -34,9 +34,9 @@
       "title": "selectedWeeks",
       "type": "array",
       "description": "Selects the starting week and the ending week if you are scraping the type: 'SELECTEDWEEKS' ",
-      "default": "[1,4]",
+      "default": [1,4],
       "editor": "json",
-      "prefill": "[1,4]"
+      "prefill": [1,4]
     },
     "useProxy": {
       "title": "useProxy",
