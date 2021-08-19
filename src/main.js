@@ -20,7 +20,11 @@ Apify.main(async () => {
 
     const requestQueue = await Apify.openRequestQueue();
     const proxyConfiguration = await Apify.createProxyConfiguration({ useApifyProxy: input.useProxy });
-    await buildRequests(input, requestQueue);
+    try {
+        await buildRequests(input, requestQueue);
+    } catch (e) {
+        log.info(e);
+    }
 
     const crawler = new Apify.CheerioCrawler({
         requestQueue,
