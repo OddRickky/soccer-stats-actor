@@ -1,4 +1,4 @@
-const gameInformation = function ({ matchWeek, date, home, score, away, ht, season }) {
+const gameInformation = function ({ matchWeek, date, home, score, away, ht, season, league }) {
     this.matchWeek = matchWeek;
     this.date = date || '';
     this.home = home || '';
@@ -6,9 +6,10 @@ const gameInformation = function ({ matchWeek, date, home, score, away, ht, seas
     this.away = away || '';
     this.ht = ht || '';
     this.season = season || '';
+    this.league = league || '';
 };
 
-const tableInformation = function ({ position, name, played, win, draw, lose, goalsFor, goalsAgainst, goalDifference, points, season }) {
+const tableInformation = function ({ position, name, played, win, draw, lose, goalsFor, goalsAgainst, goalDifference, points, season, league }) {
     this.position = position || '';
     this.name = name || '';
     this.played = played || '';
@@ -20,6 +21,7 @@ const tableInformation = function ({ position, name, played, win, draw, lose, go
     this.goalDifference = goalDifference || '';
     this.points = points || '';
     this.season = season || '';
+    this.league = league || '';
 };
 
 const data = { gameInformation, tableInformation };

@@ -8,8 +8,6 @@ const { utils: { log } } = Apify;
 
 Apify.main(async () => {
     const rawInput = await Apify.getInput();
-    const newDataSetId = Apify.getEnv().defaultDatasetId;
-    log.info(`Dataset Id: ${newDataSetId}`);
 
     const input = {
         type: rawInput.type.toUpperCase(), // TABLES //SELECTEDWEEKS // CURRENTWEEK // // FULLSCHEDULE

@@ -9,7 +9,7 @@ async function getMatchData(request, $) {
     // If it is the currentweek I have to take the matchweek number from DOM as the url stores total stored weeks as the current one
     let { matchWeek } = request.userData;
     matchWeek = matchWeek === 'CURRENT' ? ($('font[color="#fcfcfc"]').text()).replace(/\s+/g, ' ').split(' ')[2] : matchWeek;
-    const dataset = await Apify.openDataset(`matches-${league}-season-${season}`);
+    // const dataset = await Apify.openDataset(`matches-${league}-season-${season}`); path for sdk
 
     const matchInformationRow = $('#btable:eq(0)').find('.odd');
     const matchDayInfo = [];
@@ -33,6 +33,7 @@ async function getMatchData(request, $) {
                 away,
                 ht,
                 season,
+                league,
             });
             matchDayInfo.push(gameInformation);
         } else if (date && !matchWeek) { // Full Schedule page doesn't have weeknames. To get full schedule with week, use SELECTEDWEEKS type input.
@@ -43,11 +44,12 @@ async function getMatchData(request, $) {
                 away,
                 ht,
                 season,
+                league,
             });
             matchDayInfo.push(gameInformation);
         }
     });
-    await dataset.pushData(matchDayInfo);
+    await Apify.pushData(matchDayInfo);
 }
 
 async function getTable(request, $) {
@@ -63,13 +65,13 @@ async function getTable(request, $) {
     const tableIndex = firstSelector.length > secondSelector.length ? tableOrderArray[0] : tableOrderArray[1];
     const teams = ($(`#btable:eq(${tableIndex})`).find(`.odd`));
 
-    const dataset = await Apify.openDataset(`tables-${league}-season-${season}`);
+    // const dataset = await Apify.openDataset(`tables-${league}-season-${season}`); path for sdk
 
     const totalColumns = 9;
     const tableSummary = [];
 
     teams.each((index) => {
-        const teamData = dataFactory.createData('tableInformation', { season });
+        const teamData = dataFactory.createData('tableInformation', { season, league });
         let row = 0;
         while (row <= totalColumns) {
             const information = $(`#btable:eq(${tableIndex})`).find(`.odd:eq(${index})`).find(`td:eq(${row})`);
@@ -78,8 +80,7 @@ async function getTable(request, $) {
         }
         tableSummary.push(teamData);
     });
-    console.log(tableSummary);
-    await dataset.pushData(tableSummary);
+    await Apify.pushData(tableSummary);
 }
 
 module.exports = { getMatchData, getTable };
