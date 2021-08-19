@@ -1,34 +1,39 @@
-# CheerioCrawler project
 
-This template is a production ready boilerplate for developing with `CheerioCrawler`.
-Use this to bootstrap your projects using the most up-to-date code.
+## Soccer Stats Actor
 
-If you're looking for examples or want to learn more visit:
+Apify soccer-stats-scraper providing an API for the soccerstats.com website. This actor can extract data from soccerstats.com pages for the given inputs
 
-- [Tutorial](https://sdk.apify.com/docs/guides/getting-started#cheeriocrawler-aka-jquery-crawler)
-- [Documentation](https://sdk.apify.com/docs/api/cheerio-crawler)
-- [Examples](https://sdk.apify.com/docs/examples/cheerio-crawler)
+**Note: You can follow the descriptions in the input editor to build your inputs easier.** 
 
-## Documentation reference
+There are 4 main types of data that you can gather: 
 
-- [Apify SDK](https://sdk.apify.com/)
-- [Apify Actor documentation](https://docs.apify.com/actor)
-- [Apify CLI](https://docs.apify.com/cli)
+**League Table**: You can get league tables, using 'TABLES' as an input.
 
-## Writing a README
+**Current Matchday**: You can get the results of the matchday for selected leagues, using 'CURRENTWEEK' as the input.
 
-See our tutorial on [writing READMEs for your actors](https://help.apify.com/en/articles/2912548-how-to-write-great-readme-for-your-actors) if you need more inspiration.
+**Selected Matchdays**: You can get the results of matchdays between given weeks, using 'SELECTEDWEEKS' as the input. You should also provide two match weeks in selectedWeeks input. If you are using a different type, you can leave the selectedWeeks input as it is.
 
-### Table of contents
+**Season Schedule**: You can get the entire season schedule, using 'FULLSCHEDULE' as the input. Note that this input does not provide match week numbers as the output, if you also want to include the matchday in your output, you can pass 'SELECTEDWEEKS' as the input and manually provide the start and the end week. e: [1,34]
 
-If your README requires a table of contents, use the template below and make sure to keep the `<!-- toc start -->` and `<!-- toc end -->` markers.
+### INPUT Example
 
-<!-- toc start -->
-- Introduction
-- Use Cases
-  - Case 1
-  - Case 2
-- Input
-- Output
-- Miscellaneous
- <!-- toc end -->
+```
+{ 
+    "type": "TABLES",
+    "leagues": ["england", "france"],
+    "season": "2021-2022",
+    "selectedWeeks": [2,5],
+    "useproxy": false
+}
+```
+
+### Available type inputs:
+"TABLES", "CURRENTWEEK", "SELECTEDWEEKS", "FULLSCHEDULE"
+
+### Available season inputs:
+ 
+"2021-2022", "2020"
+
+ ### Available league inputs:
+
+"brazil", "czechrepublic", "germany", "germany2", "denmark", "england", "england2", "spain", "spain2", "france", "france2", "greece", "netherlands", "italy", "italy2", "poland", "portugal", "russia", "turkey"
