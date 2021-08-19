@@ -23,7 +23,7 @@
     "season": {
       "title": "season",
       "type": "string",
-      "description": "Selects the given season",
+      "description": "Selects the season.",
       "default": "2021-2022",
       "editor": "select",
       "enum": ["2021-2022", "2020"],
@@ -32,7 +32,7 @@
     "selectedWeeks": {
       "title": "selectedWeeks",
       "type": "array",
-      "description": "Selects the starting week and the ending week if you are scraping matchweeks from given two weeks. Array length must be 2",
+      "description": "Selects the starting week and the ending week if you are scraping matchweeks from given two weeks. Array length must be 2.",
       "default": [1,4],
       "editor": "json",
       "prefill": [1,4]
@@ -40,7 +40,7 @@
     "useProxy": {
       "title": "useProxy",
       "type": "boolean",
-      "description": "Selects if you want to use a proxy",
+      "description": "Selects if you want to use a proxy.",
       "editor": "checkbox",
       "default": false
     }
