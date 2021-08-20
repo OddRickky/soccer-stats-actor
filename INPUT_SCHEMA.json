@@ -29,7 +29,7 @@
       "type": "array",
       "description": "Array of leagues that will be scraped. Available leagues: brazil, czechrepublic, germany, germany2, denmark, england, england2, spain, spain2, france, france2, greece, netherlands, italy, italy2, poland, portugal, russia, turkey",
       "editor": "stringList",
-      "prefill": "england"
+      "prefill": ["england"]
     },
     "season": {
       "title": "season",
