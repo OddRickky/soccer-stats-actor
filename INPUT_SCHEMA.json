@@ -78,9 +78,5 @@
       "minimum": 2
     }
   },
-  "required": [
-    "informationType",
-    "selectedLeagues",
-    "season"
-  ]
+  "required": []
 }
