@@ -9,6 +9,7 @@
       "type": "string",
       "description": "Defines the information that will be scraped. If you are scraping matches between two weeks, you should also define array of two weeks as the selectedWeeks input",
       "default": "TABLES",
+      "prefill": "Tables",
       "editor": "select",
       "enum": [
         "TABLES",
@@ -25,7 +26,7 @@
     },
     "selectedLeagues": {
       "title": "selectedLeagues",
-      "type": "array",
+      "type": "string",
       "description": "Array of leagues that will be scraped. Available leagues: brazil, czechrepublic, germany, germany2, denmark, england, england2, spain, spain2, france, france2, greece, netherlands, italy, italy2, poland, portugal, russia, turkey",
       "editor": "stringList",
       "prefill": [
