@@ -1,5 +1,5 @@
 
-## Soccer Stats Actor
+## Soccer Stats Scraper
 
 Apify soccer-stats-scraper providing an API for the soccerstats.com website. This actor can extract data from soccerstats.com pages for the given inputs
 

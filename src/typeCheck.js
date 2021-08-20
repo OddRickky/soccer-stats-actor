@@ -2,7 +2,7 @@ const { types, seasons, leagues } = require('./enum');
 // || startWeek > endWeek || startWeek < 0 || endWeek > 50) {
 function typeCheck(input) {
     // checking if the type input is correct
-    if (!Object.values(types).includes(input.type)) throw new Error(`Parameter should be one of those: ${Object.values(types)}`);
+    if (!Object.values(types).includes(input.type)) throw new Error({ zzz: `Parameter should be one of those: ${Object.values(types)}` });
 
     // checking if selectedweeks are correct
     if (input.type === types.SELECTEDWEEKS) {
