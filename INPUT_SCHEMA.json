@@ -79,8 +79,8 @@
     }
   },
   "required": [
+    "informationType",
     "selectedLeagues",
-    "useProxy",
     "season"
   ]
 }
