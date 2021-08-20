@@ -4,21 +4,31 @@
   "type": "object",
   "schemaVersion": 1,
   "properties": {
-    "type": {
-      "title": "type",
+    "informationType": {
+      "title": "informationType",
       "type": "string",
       "description": "Defines the information that will be scraped. If you are scraping matches between two weeks, you should also define array of two weeks as the selectedWeeks input",
       "default": "TABLES",
       "editor": "select",
-      "enum": ["TABLES", "CURRENTWEEK", "SELECTEDWEEKS", "FULLSCHEDULE"],
-      "enumTitles": ["Tables", "Current Matchday", "Matches between two weeks", "Season schedule"]
+      "enum": [
+        "TABLES",
+        "CURRENTWEEK",
+        "SELECTEDWEEKS",
+        "FULLSCHEDULE"
+      ],
+      "enumTitles": [
+        "Tables",
+        "Current Matchday",
+        "Matches between two weeks",
+        "Season schedule"
+      ]
     },
-    "leagues": {
-      "title": "leagues",
+    "selectedLeagues": {
+      "title": "selectedLeagues",
       "type": "array",
       "description": "Array of leagues that will be scraped. Available leagues: brazil, czechrepublic, germany, germany2, denmark, england, england2, spain, spain2, france, france2, greece, netherlands, italy, italy2, poland, portugal, russia, turkey",
-      "editor": "json",
-      "prefill": ["england", "france"]
+      "editor": "stringList",
+      "prefill": ["england","france"]
     },
     "season": {
       "title": "season",
@@ -26,24 +36,51 @@
       "description": "Selects the season.",
       "default": "2021-2022",
       "editor": "select",
-      "enum": ["2021-2022", "2020"],
-      "enumTitles": ["2021-2022", "2020-2021"]
+      "enum": [
+        "2021-2022",
+        "2020"
+      ],
+      "enumTitles": [
+        "2021-2022",
+        "2020-2021"
+      ]
     },
-    "selectedWeeks": {
-      "title": "selectedWeeks",
-      "type": "array",
-      "description": "Selects the starting week and the ending week if you are scraping matchweeks from given two weeks. Array length must be 2.",
-      "default": [1,4],
-      "editor": "json",
-      "prefill": [1,4]
+    "proxyConfig": {
+      "title": "Proxy configuration",
+      "type": "object",
+      "description": "Allows user to use Apify proxy or custom proxies.",
+      "prefill": {
+          "useApifyProxy": false
+      },
+      "editor": "proxy",
+      "sectionCaption": "Browser, page and proxy settings",
+      "sectionDescription": "How the browsers will behave during the scraping process."
+  },
+    "startWeek": {
+      "title": "startWeek",
+      "type": "integer",
+      "description": "Picks a start match week to scrape selected weeks.",
+      "default": 1,
+      "editor": "number",
+      "prefill": 1,
+      "maximum": 51,
+      "minimum": 1
     },
-    "useProxy": {
-      "title": "useProxy",
-      "type": "boolean",
-      "description": "Selects if you want to use a proxy.",
-      "editor": "checkbox",
-      "default": false
+    "endWeek": {
+      "title": "endWeek",
+      "type": "integer",
+      "description": "Picks an end match week to scrape selected weeks.",
+      "default": 4,
+      "editor": "number",
+      "prefill": 4,
+      "maximum": 52,
+      "minimum": 2
     }
   },
-  "required": []
+  "required": [
+    "selectedLeagues",
+    "useProxy",
+    "endWeek",
+    "season"
+  ]
 }

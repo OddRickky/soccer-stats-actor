@@ -1,50 +1,46 @@
 const Apify = require('apify');
-const buildRequests = require('./requestBuilders');
+const { buildRequests, findCurrentWeek } = require('./requestBuilders');
 const typeCheck = require('./typeCheck');
-const { handleTables, handleSchedule, handleCurrentWeek } = require('./routes');
+const { getMatchData, getTable } = require('./matchFunctions');
 const { utilLabels } = require('./enum');
 
 const { utils: { log } } = Apify;
 
 Apify.main(async () => {
-    const rawInput = await Apify.getInput();
+    const input = await Apify.getInput();
 
-    const input = {
-        type: rawInput.type.toUpperCase(), // TABLES //SELECTEDWEEKS // CURRENTWEEK // // FULLSCHEDULE
-        leagues: rawInput.leagues.map((league) => league.toLowerCase()),
-        selectedWeeks: rawInput.selectedWeeks, // array of two items
-        season: rawInput.season, // or '2021-2022' '2020'
-        useProxy: rawInput.useProxy, // boolean
-    };
-    typeCheck(input);
+    const {
+        type = input.informationType.toUpperCase(),
+        leagues = input.selectedLeagues.map((league) => league.toLowerCase()),
+        startWeek,
+        endWeek,
+        season,
+        proxyConfig,
+    } = input;
+
+    typeCheck(type, leagues, startWeek, endWeek, season, proxyConfig);
 
     const requestQueue = await Apify.openRequestQueue();
-    const proxyConfiguration = await Apify.createProxyConfiguration({ useApifyProxy: input.useProxy });
-    try {
-        await buildRequests(input, requestQueue);
-    } catch (e) {
-        log.info(e);
-    }
+    const proxyConfiguration = await Apify.createProxyConfiguration(proxyConfig);
+
+    await buildRequests(type, leagues, season, startWeek, endWeek, requestQueue);
 
     const crawler = new Apify.CheerioCrawler({
         requestQueue,
         proxyConfiguration,
         useSessionPool: true,
         persistCookiesPerSession: true,
-        sessionPoolOptions: {
-            maxPoolSize: 100,
-        },
-        maxConcurrency: 5,
         handlePageFunction: async (context) => {
-            const { url, userData: { label } } = context.request;
+            const { $, request } = context;
+            const { url, userData: { label } } = request;
             log.info('Page opened.', { label, url });
             switch (label) {
                 case utilLabels.LEAGUETABLES:
-                    return handleTables(context);
+                    return getTable(request, $);
                 case utilLabels.CURRENT:
-                    return handleCurrentWeek(context, requestQueue);
+                    return findCurrentWeek(context, requestQueue);
                 case utilLabels.SCHEDULE:
-                    return handleSchedule(context);
+                    return getMatchData(request, $);
                 default:
                     throw new Error('Invalid label');
             }

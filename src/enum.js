@@ -9,19 +9,24 @@ const types = {
     CURRENTWEEK: 'CURRENTWEEK',
     FULLSCHEDULE: 'FULLSCHEDULE',
 };
+// naming here might change
 
-const utilLabels = { // naming here might change
+const utilLabels = {
     SCHEDULE: 'SCHEDULE',
     LEAGUETABLES: 'LEAGUETABLES',
     CURRENT: 'CURRENT',
 };
 
-const seasons = { // will expand for small leagues & leagues that have two seasons (apertura/clasura)
+// will expand for small leagues & leagues that have two seasons (apertura/clasura)
+
+const seasons = {
     SEASON2022: '2021-2022',
     SEASON2021: '2020',
 };
 
-const leagues = { // available leagues so far, smaller/different leagues have different dom elements and selectors, to be expanded.
+// available leagues so far, smaller/different leagues have different dom elements and selectors, to be expanded.
+
+const leagues = {
     BRAZIL: 'brazil',
     CZECHREPUBLIC: 'czechrepublic',
     GERMANY: 'germany',
