@@ -1,4 +1,4 @@
-const url = {
+const baseUrl = {
     RESULTS: 'http://www.soccerstats.com/results.asp?league=',
     LATEST: 'http://www.soccerstats.com/latest.asp?league=',
 };
@@ -48,4 +48,4 @@ const leagues = {
     TURKEY: 'turkey',
 };
 
-module.exports = { types, seasons, utilLabels, leagues, url };
+module.exports = { types, seasons, utilLabels, leagues, baseUrl };

@@ -1,5 +1,5 @@
 {
-	"name": "test-cheerio",
+	"name": "soccer-stats-actor",
 	"version": "0.0.1",
 	"description": "This is a boilerplate of an Apify actor.",
 	"dependencies": {

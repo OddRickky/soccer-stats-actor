@@ -1,42 +1,15 @@
-const { utilLabels, types, seasons, url } = require('./enum');
+const { utilLabels, types, seasons, baseUrl } = require('./enum');
 
-// adds request url and userdata to get to page where it can access the matchweek number
-async function buildCurrentWeek(leagues, season, requestQueue) {
-    for (const league of leagues) {
-        await requestQueue.addRequest({ url: `${url.RESULTS}${league}`,
-            userData: { label: utilLabels.CURRENT, league, season } });
-    }
-}
-// adds request url and userdata for the current week
-async function buildSelectedWeeks(leagues, season, startWeek, endWeek, requestQueue) {
-    let start = startWeek;
-    const end = endWeek;
-    for (const league of leagues) {
-        start = startWeek;
-        const leagueYear = season === seasons.SEASON2022 ? `${league}` : `${league}_${season}`;
-
-        while (start <= end) {
-            await requestQueue.addRequest({ url: `${url.RESULTS}${leagueYear}&pmtype=round${start}`,
-                userData: { label: utilLabels.SCHEDULE, league, season, matchWeek: start } });
-            start++;
-        }
-    }
-}
-// adds request url and userdata for the season schedule
-async function buildFullSchedule(leagues, season, requestQueue) {
-    for (const league of leagues) {
-        const leagueYear = season === seasons.SEASON2022 ? `${league}` : `${league}_${season}`;
-        await requestQueue.addRequest({ url: `${url.RESULTS}${leagueYear}&pmtype=bydate`,
-            userData: { label: utilLabels.SCHEDULE, league, season } });
-    }
-}
-// adds request url and userdata to build the league table
-async function buildTables(leagues, season, requestQueue) {
-    for (const league of leagues) {
-        const leagueYear = season === seasons.SEASON2022 ? `${league}` : `${league}_${season}`;
-        await requestQueue.addRequest({ url: `${url.LATEST}${leagueYear}`,
-            userData: { label: utilLabels.LEAGUETABLES, league, season } });
-    }
+async function buildRequestOptions(urlType, label, league, season, matchWeek) {
+    return {
+        url: urlType,
+        userData: {
+            label,
+            league,
+            season,
+            matchWeek,
+        },
+    };
 }
 // gets the week number of the current week, url stores the total recorded weeks
 exports.findCurrentWeek = async ({ request, $ }, requestQueue) => {
@@ -53,17 +26,54 @@ function invalidParam(label) {
     throw new Error(`${label} is an invalid input, please check your inputs.`);
 }
 
-exports.buildRequests = async (type, leagues, season, startWeek, endWeek, requestQueue) => {
+exports.buildRequests = async (type, leagues, season, startWeek, endWeek) => {
     const label = type;
+    const requestOptionsArray = [];
     switch (label) {
         case types.SELECTEDWEEKS:
-            return buildSelectedWeeks(leagues, season, startWeek, endWeek, requestQueue);
+            for (const league of leagues) {
+                let start = startWeek;
+                const end = endWeek;
+                const leagueYear = season === seasons.SEASON2022 ? `${league}` : `${league}_${season}`;
+
+                while (start <= end) {
+                    const url = `${baseUrl.RESULTS}${leagueYear}&pmtype=round${start}`;
+                    const requestOptions = await buildRequestOptions(url, utilLabels.CURRENT, league, season, start);
+                    requestOptionsArray.push(requestOptions);
+                    start++;
+                }
+            }
+            return requestOptionsArray;
+
         case types.CURRENTWEEK:
-            return buildCurrentWeek(leagues, season, requestQueue);
+            for (const league of leagues) {
+                const url = `${baseUrl.RESULTS}${league}`;
+
+                const requestOptions = await buildRequestOptions(url, utilLabels.CURRENT, league, season);
+                requestOptionsArray.push(requestOptions);
+            }
+            return requestOptionsArray;
+
         case types.FULLSCHEDULE:
-            return buildFullSchedule(leagues, season, requestQueue);
+            for (const league of leagues) {
+                const leagueYear = season === seasons.SEASON2022 ? `${league}` : `${league}_${season}`;
+                const url = `${baseUrl.RESULTS}${leagueYear}&pmtype=bydate`;
+
+                const requestOptions = await buildRequestOptions(url, utilLabels.SCHEDULE, league, season);
+                requestOptionsArray.push(requestOptions);
+            }
+            return requestOptionsArray;
+
         case types.TABLES:
-            return buildTables(leagues, season, requestQueue);
+            for (const league of leagues) {
+                const leagueYear = season === seasons.SEASON2022 ? `${league}` : `${league}_${season}`;
+                const url = `${baseUrl.LATEST}${leagueYear}`;
+
+                const requestOptions = await buildRequestOptions(url, utilLabels.LEAGUETABLES, league, season);
+                requestOptionsArray.push(requestOptions);
+            }
+            return requestOptionsArray;
+
         default:
             return invalidParam(label);
     }

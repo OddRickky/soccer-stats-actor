@@ -11,7 +11,7 @@ There are 4 main types of data that you can gather:
 
 **Current Matchday**: You can get the results of the matchday for selected leagues, using 'CURRENTWEEK' as the input.
 
-**Selected Matchdays**: You can get the results of matchdays between given weeks, using 'SELECTEDWEEKS' as the input. You should also provide two match weeks in selectedWeeks input. If you are using a different type, you can leave the selectedWeeks input as it is.
+**Selected Matchdays**: You can get the results of matchdays between given weeks, using 'SELECTEDWEEKS' as the input. You should also provide two match weeks for startWeek and endWeek inputs. If you are using a different type, you can leave the those values as it is.
 
 **Season Schedule**: You can get the entire season schedule, using 'FULLSCHEDULE' as the input. Note that this input does not provide match week numbers as the output, if you also want to include the matchday in your output, you can pass 'SELECTEDWEEKS' as the input and manually provide the start and the end week. e: [1,34]
 
@@ -22,7 +22,8 @@ There are 4 main types of data that you can gather:
     "type": "TABLES",
     "leagues": ["england", "france"],
     "season": "2021-2022",
-    "selectedWeeks": [2,5],
+    "startWeek": 1,
+    "endWeek": 6,
     "useproxy": false
 }
 ```

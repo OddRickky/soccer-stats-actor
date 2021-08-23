@@ -23,7 +23,10 @@ Apify.main(async () => {
     const requestQueue = await Apify.openRequestQueue();
     const proxyConfiguration = await Apify.createProxyConfiguration(proxyConfig);
 
-    await buildRequests(type, leagues, season, startWeek, endWeek, requestQueue);
+    const requestOptions = await buildRequests(type, leagues, season, startWeek, endWeek);
+    for (const request of requestOptions) {
+        await requestQueue.addRequest(request);
+    }
 
     const crawler = new Apify.CheerioCrawler({
         requestQueue,

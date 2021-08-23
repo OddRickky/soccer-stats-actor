@@ -7,33 +7,51 @@ function typeCheck(inputType, inputLeagues, inputStartWeek, inputEndWeek, inputS
     // checking if selectedweeks are correct
     if (inputType === types.SELECTEDWEEKS) {
         if ((typeof inputStartWeek !== 'number') || (typeof inputEndWeek !== 'number')) {
-            throw new Error('Wrong selected weeks input:Input should include 2 numbers, starting and an end week.');
+            const message = 'Input should include 2 numbers, starting and an end week.';
+            throw new Error(`Wrong ${inputType} input: ${message}`);
         }
 
         if (!(isInteger(inputStartWeek)) || !(isInteger(inputEndWeek))) {
-            throw new Error('Wrong selected weeks input: Input can\'t be a float number');
+            const message = 'Input can\'t be a float number';
+            throw new Error(`Wrong startWeek or endWeek input: ${message}`);
         }
 
-        if (inputStartWeek > inputEndWeek) throw new Error('Wrong selected weeks input: endWeek should be greater than the startWeek');
+        if (inputStartWeek > inputEndWeek) {
+            const message = 'endWeek should be greater than the startWeek';
+            throw new Error(`Wrong selected weeks input: endWeek ${message}`);
+        }
     }
 
     // checking if the league input is correct
-    if (!Array.isArray(inputLeagues)) throw new Error(`Wrong league input: League values should be stored in an array`);
+    if (!Array.isArray(inputLeagues)) {
+        const message = `League values should be stored in an array`;
+        throw new Error(`Wrong league input: ${message}`);
+    }
 
     for (const league of inputLeagues) {
         if (!Object.values(leagues).includes(league)) {
-            throw new Error(`Wrong league input: Parameter ${league} does not exist. Available league inputs: ${Object.values(leagues)}`);
+            const message = `Parameter ${league} does not exist. Available league inputs: ${Object.values(leagues)}`;
+            throw new Error(`Wrong league input: ${message}`);
         }
     }
 
     // checking if seasons are correct
-    if (!Object.values(seasons).includes(inputSeason)) throw new Error(`Wrong season input: Available season inputs - ${Object.values(seasons)}`);
+    if (!Object.values(seasons).includes(inputSeason)) {
+        const message = `Available season inputs - ${Object.values(seasons)}`;
+        throw new Error(`Wrong season input: ${message}`);
+    }
 
     // checking if proxy settings are in an object
-    if (!(typeof inputProxyConfiguration === 'object')) throw new Error(`Wrong proxy input: Configuration settings must be stored in an object`);
+    if (!(typeof inputProxyConfiguration === 'object')) {
+        const message = `Configuration settings must be stored in an object`;
+        throw new Error(`Wrong proxy input: ${message}`);
+    }
 
     // checking if proxy settings has useApifyProxy
-    if (!('useApifyProxy' in inputProxyConfiguration)) throw new Error(`Wrong proxy input: Configuration object should have a key 'useApifyProxy'`);
+    if (!('useApifyProxy' in inputProxyConfiguration)) {
+        const message = `Configuration object should have a key 'useApifyProxy'`;
+        throw new Error(`Wrong proxy input: ${message}`);
+    }
 }
 
 function isInteger(n) {
