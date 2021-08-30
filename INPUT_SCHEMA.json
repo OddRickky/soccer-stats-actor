@@ -9,7 +9,7 @@
       "type": "string",
       "description": "Defines the information that will be scraped. If you are scraping matches between two weeks, you should also define array of two weeks as the selectedWeeks input",
       "default": "TABLES",
-      "prefill": "Tables",
+      "prefill": "TABLES",
       "editor": "select",
       "enum": [
         "TABLES",
@@ -29,7 +29,8 @@
       "type": "array",
       "description": "Array of leagues that will be scraped. Available leagues: brazil, czechrepublic, germany, germany2, denmark, england, england2, spain, spain2, france, france2, greece, netherlands, italy, italy2, poland, portugal, russia, turkey",
       "editor": "stringList",
-      "default": ["england"]
+      "default": ["england"],
+      "prefill": ["england"]
     },
     "season": {
       "title": "season",
@@ -51,7 +52,7 @@
       "type": "object",
       "description": "Allows user to use Apify proxy or custom proxies.",
       "prefill": {
-          "useApifyProxy": false
+          "useApifyProxy": true
       },
       "editor": "proxy",
       "sectionCaption": "Browser, page and proxy settings",
