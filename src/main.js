@@ -1,4 +1,5 @@
 const Apify = require('apify');
+
 const { buildRequests, findCurrentWeek } = require('./requestBuilders');
 const typeCheck = require('./typeCheck');
 const { getMatchData, getTable } = require('./matchFunctions');
@@ -14,9 +15,12 @@ Apify.main(async () => {
         leagues = input.selectedLeagues.map((league) => league.toLowerCase()),
         startWeek,
         endWeek,
-        season,
         proxyConfig,
     } = input;
+
+    let { season } = input;
+
+    if (season === '2020-2021') season = '2020';
 
     typeCheck(type, leagues, startWeek, endWeek, season, proxyConfig);
 
