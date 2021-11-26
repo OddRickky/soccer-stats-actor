@@ -38,7 +38,7 @@ exports.buildRequests = async (type, leagues, season, startWeek, endWeek) => {
 
                 while (start <= end) {
                     const url = `${baseUrl.RESULTS}${leagueYear}&pmtype=round${start}`;
-                    const requestOptions = await buildRequestOptions(url, utilLabels.CURRENT, league, season, start);
+                    const requestOptions = await buildRequestOptions(url, utilLabels.SCHEDULE, league, season, start);
                     requestOptionsArray.push(requestOptions);
                     start++;
                 }
@@ -58,7 +58,6 @@ exports.buildRequests = async (type, leagues, season, startWeek, endWeek) => {
             for (const league of leagues) {
                 const leagueYear = season === seasons.SEASON2022 ? `${league}` : `${league}_${season}`;
                 const url = `${baseUrl.RESULTS}${leagueYear}&pmtype=bydate`;
-
                 const requestOptions = await buildRequestOptions(url, utilLabels.SCHEDULE, league, season);
                 requestOptionsArray.push(requestOptions);
             }
