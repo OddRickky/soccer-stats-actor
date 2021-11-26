@@ -33,7 +33,7 @@ There are 4 main types of data that you can gather:
 
 ### Available season inputs:
  
-"2021-2022", "2020"
+"2021-2022", "2020-2021"
 
  ### Available league inputs:
 
