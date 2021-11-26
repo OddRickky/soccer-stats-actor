@@ -1,10 +1,12 @@
+const moment = require('moment');
+
 const gameInformation = function ({ matchWeek, date, home, score, away, ht, season, league }) {
     this.matchWeek = matchWeek;
-    this.date = date || '';
+    this.date = date ? moment(date).format('DD-MM') : '';
     this.home = home || '';
     this.score = score.includes(':') ? '' : score || ''; // if game is not played, this selector shows hour, like 19:45
     this.away = away || '';
-    this.ht = ht || '';
+    this.ht = ht ? ht.replace('(', '').replace(')', '').replace('-', ' - ') : '';
     this.season = season || '';
     this.league = league || '';
 };
