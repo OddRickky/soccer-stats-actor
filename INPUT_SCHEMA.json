@@ -5,7 +5,7 @@
   "schemaVersion": 1,
   "properties": {
     "informationType": {
-      "title": "informationType",
+      "title": "Information Type",
       "type": "string",
       "description": "Defines the information that will be scraped. If you are scraping matches between two weeks, you should also define array of two weeks as the selectedWeeks input",
       "default": "TABLES",
@@ -25,7 +25,7 @@
       ]
     },
     "selectedLeagues": {
-      "title": "selectedLeagues",
+      "title": "Selected Leagues",
       "type": "array",
       "description": "Array of leagues that will be scraped. Available leagues: brazil, czechrepublic, germany, germany2, denmark, england, england2, spain, spain2, france, france2, greece, netherlands, italy, italy2, poland, portugal, russia, turkey",
       "editor": "stringList",
@@ -33,19 +33,39 @@
       "prefill": ["england"]
     },
     "season": {
-      "title": "season",
+      "title": "Season",
       "type": "string",
       "description": "Selects the season.",
       "default": "2021-2022",
       "editor": "select",
       "enum": [
         "2021-2022",
-        "2020"
+        "2020-2021"
       ],
       "enumTitles": [
         "2021-2022",
         "2020-2021"
       ]
+    },
+    "startWeek": {
+      "title": "Start Week",
+      "type": "integer",
+      "description": "Picks a start match week to scrape selected weeks.",
+      "default": 1,
+      "editor": "number",
+      "prefill": 1,
+      "maximum": 51,
+      "minimum": 1
+    },
+    "endWeek": {
+      "title": "End Week",
+      "type": "integer",
+      "description": "Picks an end match week to scrape selected weeks.",
+      "default": 4,
+      "editor": "number",
+      "prefill": 4,
+      "maximum": 52,
+      "minimum": 2
     },
     "proxyConfig": {
       "title": "Proxy configuration",
@@ -57,27 +77,7 @@
       "editor": "proxy",
       "sectionCaption": "Browser, page and proxy settings",
       "sectionDescription": "How the browsers will behave during the scraping process."
+  }
   },
-    "startWeek": {
-      "title": "startWeek",
-      "type": "integer",
-      "description": "Picks a start match week to scrape selected weeks.",
-      "default": 1,
-      "editor": "number",
-      "prefill": 1,
-      "maximum": 51,
-      "minimum": 1
-    },
-    "endWeek": {
-      "title": "endWeek",
-      "type": "integer",
-      "description": "Picks an end match week to scrape selected weeks.",
-      "default": 4,
-      "editor": "number",
-      "prefill": 4,
-      "maximum": 52,
-      "minimum": 2
-    }
-  },
-  "required": []
+  "required": ["informationType", "season"]
 }
