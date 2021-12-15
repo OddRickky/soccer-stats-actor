@@ -7,7 +7,7 @@
 
 Our SoccerSTATS.com Scraper provides an unofficial SoccerSTATS API for extracting the data on match results, schedules, progress over the weeks, etc. Using this scraper, you can pull data from the soccerstats.com website; it works best with leagues and matches pages.
 
-## Features: 
+## Features
 
 So far, there are *four* main types of soccer stats data you can collect:
 
@@ -25,7 +25,7 @@ If you're not sure how much credit you've got on your plan and whether you might
 
 ## Tutorial
 
-For a more detailed explanation on how to scrape soccerstats.com, see a quick [How to scrape SoccerSTATS tutorial](https://blog.apify.com/how-to-scrape-soccerstats/).  And if you need more ideas on how to use extracted data, check out our [industries pages](https://apify.com/industries)  showing examples of how enterprises use data scraped from the web in their workflows, projects, and missions. 
+For a more detailed explanation on how to scrape Soccerstats.com, see a quick [How to scrape SoccerSTATS tutorial](https://blog.apify.com/how-to-scrape-football-data-soccerstats/).  And if you need more ideas on how to use extracted data, check out our [industries pages](https://apify.com/industries)  showing examples of how enterprises use data scraped from the web in their workflows, projects, and missions. 
 
 ## Input parameters
 
@@ -45,17 +45,16 @@ If this actor is run on our [Platform](https://console.apify.com/), our brand ne
 
 ###  Example
 
-```
+```javascript
 {  
-"informationType":  
-"CURRENTWEEK",  
-"selectedLeagues":  
-[  "England"  ],  
-"startWeek":  1,  
-"endWeek":  10,  
-"proxyConfig":  {  
-"useApifyProxy":  true  },  
-"season":  "2021-2022"  
+	"informationType":  "CURRENTWEEK",  
+	"selectedLeagues":  ["England"],  
+	"startWeek":  1,  
+	"endWeek":  10,  
+	"proxyConfig": {  
+		"useApifyProxy":  true 
+	},  
+	"season":  "2021-2022"  
 }
 ```
 
@@ -101,6 +100,7 @@ Here's the piece of the output you'd get if you run a task with the input parame
 },
 ...
 ```
+
 **How to use the extracted football stats data:**
 
 -  **Quickly collect the sports data** from the current and previous season and use it for news and sports journalism. 
@@ -119,7 +119,7 @@ Here's the piece of the output you'd get if you run a task with the input parame
 
 ## Other sports scrapers
 
-We've got a few other football APIs and sport-related scrapers in stock for you; for instance, see this  [Transfermarkt Scraper.] (https://apify.com/petr_cermak/transfermarkt)
+We've got a few other football APIs and sport-related scrapers in stock for you; for instance, see this  [Transfermarkt Scraper.](https://apify.com/petr_cermak/transfermarkt)
 
 ## Your feedback
 
